@@ -953,7 +953,7 @@
             top = num(points[1]),
             width = (points[2] - points[0]),
             height = (points[3] - points[1]),
-            circle = data.circle,
+            circle = data.circleRendering,
             canvas = document.createElement('canvas'),
             ctx = canvas.getContext('2d'),
             outWidth = width,
@@ -992,15 +992,14 @@
         }
 
         ctx.drawImage(this.elements.preview, left, top, width, height, startX, startY, outWidth, outHeight);
-        // Highly inconvenient
-        // if (circle) {
-        //     ctx.fillStyle = '#fff';
-        //     ctx.globalCompositeOperation = 'destination-in';
-        //     ctx.beginPath();
-        //     ctx.arc(outWidth / 2, outHeight / 2, outWidth / 2, 0, Math.PI * 2, true);
-        //     ctx.closePath();
-        //     ctx.fill();
-        // }
+        if (circle) {
+            ctx.fillStyle = '#fff';
+            ctx.globalCompositeOperation = 'destination-in';
+            ctx.beginPath();
+            ctx.arc(outWidth / 2, outHeight / 2, outWidth / 2, 0, Math.PI * 2, true);
+            ctx.closePath();
+            ctx.fill();
+        }
         return canvas;
     }
 
@@ -1159,6 +1158,7 @@
         }
 
         data.circle = circle;
+        data.circleRendering = self.options.circleRendering;
         data.url = self.data.url;
         data.backgroundColor = backgroundColor;
 
